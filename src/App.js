@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import CustomerSegmentationView from './components/firstpage' 
+import CustomerSegmentationView from './components/CustomerSegmentationView' 
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,25 +12,7 @@ import {
 function App() {
   return (
     <div className="App">
-    <Router>
-            <Link to="/datasources" style={{ textDecoration: 'none',color:'#fdfdfd'}}><p>My Datasources</p></Link>
-            <Link to="/builder" style={{ textDecoration: 'none', color:'#fdfdfd'}}><p>Data Explorer</p></Link>
-        <Switch>
-              <Route path="/segmentView">
-                  <CustomerSegmentationView />
-              </Route>
-              <Route path="/CohortAnalysis">
-                  
-              </Route>
-        </Switch> 
-      </Router>
-
-
-
-
-
-
-      <FirstPage/>
+        <CustomerSegmentationView />
     </div>
   );
 }
