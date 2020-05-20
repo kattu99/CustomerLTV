@@ -7,9 +7,6 @@ import bottom from '../res/bottom.png'
 import facebook from '../res/facebook-logo.png'
 import google from '../res/google.png'
 import email from '../res/email.png'
-import DatePicker from "react-datepicker";
- 
-import "react-datepicker/dist/react-datepicker.css";
 
 import '../css/firstpage.css'
 
@@ -80,25 +77,9 @@ class CustomerSegmentationView extends Component {
             selected: '',
             input: '',
             operation: '',
-            value: '',
-            startDate: new Date(),
-            endDate: new Date(),  
+            value: ''
         }
-         
     }
-
-
-    handleStartDateChange = date => {
-        this.setState({
-          startDate: date
-        });
-      };
-
-    handleEndDateChange = date => {
-        this.setState({
-          endDate: date
-        });
-      };
 
     handleChange = (e, {value}) => {
         this.setState({
@@ -129,10 +110,6 @@ class CustomerSegmentationView extends Component {
         })
     }
 
-    runQuery = (e) => {
-        console.log(e)
-    }
-    
     render () {
         const values = [
             {
@@ -180,7 +157,113 @@ class CustomerSegmentationView extends Component {
             },
         ]
 
+        const firstUser = {
+            'age':'50',
+            'origin': 'FB',
+            'AOV': '200',
+            'LTV': '1000',
+            'RR': '15%',
+            'CR':'10%',
+        }
+        const secondUser = {
+            'age':'50',
+            'origin': 'FB',
+            'AOV': '100',
+            'LTV': '850',
+            'RR': '12%',
+            'CR':'10%',
+        }
+        const thirdUser = {
+            'age':'50',
+            'origin': 'FB',
+            'AOV': '80',
+            'LTV': '400',
+            'RR': '12',
+            'CR':'9',
+        }
 
+        const firstUser1 = {
+            'age':'50',
+            'origin': 'FB',
+            'AOV': '200',
+            'LTV': '1000',
+            'RR': '15%',
+            'CR':'10%',
+        }
+        const secondUser2 = {
+            'age':'50',
+            'origin': 'FB',
+            'AOV': '300',
+            'LTV': '5000',
+            'RR': '12%',
+            'CR':'10%',
+        }
+        const thirdUser3 = {
+            'age':'50',
+            'origin': 'FB',
+            'AOV': '1000',
+            'LTV': '50',
+            'RR': '20',
+            'CR':'7',
+        }
+
+        let component;
+        if (this.state.selected === 'Behavior') {
+            component = <div>
+                            <CustomerSegment title='Power User' image={top} user={firstUser} color='#1ECE96'/>
+                            <CustomerSegment title='High Potential' image={middle} user={secondUser} color='#4C71F4'/>
+                            <CustomerSegment title='At Risk' image={top} user={thirdUser} color='#FF7067'/>
+                        </div>
+        }
+        else if (this.state.selected === 'Marketing Channel' && this.state.condition === 'Location=CA') {
+            component = <div>
+                            <CustomerSegment title='Facebook Ads' image={facebook} user={firstUser1} color='#1ECE96'/>
+                            <CustomerSegment title='Google Ads' image={google} user={secondUser2} color='#4C71F4'/>
+                            <CustomerSegment title='Email' image={email} user={thirdUser3} color='#FF7067'/>
+                        </div>
+        }
+        else if (this.state.selected === 'Age') {
+            component = <div>
+                            <CustomerSegment title='18-25' image={top} user={firstUser} color='#1ECE96'/>
+                            <CustomerSegment title='25-40' image={middle} user={secondUser} color='#4C71F4'/>
+                            <CustomerSegment title='40-60' image={bottom} user={thirdUser} color='#FF7067'/>
+                        </div>
+        }
+        else if (this.state.selected === 'Marketing Channel') {
+            component = <div>
+                            <CustomerSegment title='Facebook Ads' image={facebook} user={firstUser} color='#1ECE96'/>
+                            <CustomerSegment title='Google Ads' image={google} user={secondUser} color='#4C71F4'/>
+                            <CustomerSegment title='Email' image={email} user={thirdUser} color='#FF7067'/>
+                        </div>
+        }
+        else if (this.state.selected === 'Marketing Channel') {
+            component = <div>
+                            <CustomerSegment title='Facebook Ads' image={facebook} user={firstUser} color='#1ECE96'/>
+                            <CustomerSegment title='Google Ads' image={google} user={secondUser} color='#4C71F4'/>
+                            <CustomerSegment title='Email' image={email} user={thirdUser} color='#FF7067'/>
+                        </div>
+        }
+        else if (this.state.selected === 'Marketing Channel') {
+            component = <div>
+                            <CustomerSegment title='Facebook Ads' image={facebook} user={firstUser} color='#1ECE96'/>
+                            <CustomerSegment title='Google Ads' image={google} user={secondUser} color='#4C71F4'/>
+                            <CustomerSegment title='Email' image={email} user={thirdUser} color='#FF7067'/>
+                        </div>
+        }
+        else if (this.state.selected === 'First Impression Channel') {
+            component = <div>
+                            <CustomerSegment title='Facebook Ads' image={facebook} user={firstUser} color='#1ECE96'/>
+                            <CustomerSegment title='Google Ads' image={google} user={secondUser} color='#4C71F4'/>
+                            <CustomerSegment title='Email' image={email} user={thirdUser} color='#FF7067'/>
+                        </div>
+        }
+        else if (this.state.selected === 'special') {
+            component = <div>
+                            <CustomerSegment title='Facebook Ads' image={facebook} user={firstUser} color='#1ECE96'/>
+                            <CustomerSegment title='Google Ads' image={google} user={secondUser} color='#4C71F4'/>
+                            <CustomerSegment title='Email' image={email} user={thirdUser} color='#FF7067'/>
+                        </div>
+        }
         return (
             <div className="firstPage">
                 <Dropdown
@@ -203,13 +286,9 @@ class CustomerSegmentationView extends Component {
                         onChange={this.OperationChange}
                     />
                     <Input onChange={this.InputChange}/>
+
                 </div>
-                <div className="dateSection">
-                    <DatePicker selected={this.state.startDate} onChange={date => this.setStartDate(date)} />
-                </div>
-                <div className='button' onClick='runQuery'>
-                    Run Query
-                </div>
+                {component}
             </div>
         )
     }
