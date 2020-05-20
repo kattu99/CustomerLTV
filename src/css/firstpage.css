@@ -1,0 +1,45 @@
+.customer_segment {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 1000px;
+    height: 400px;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 15px;
+    color: white; 
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.firstPage {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.left {
+    margin-left: 70px;
+}
+
+.heading {
+    padding-right: 55px;
+}
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    margin-left: 70px;
+}
+
+.grid {
+    margin-left: 150px;
+}
+
+.secondSection { 
+    margin-top: 20px;
+}
