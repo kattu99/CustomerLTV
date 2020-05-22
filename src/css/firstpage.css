@@ -46,6 +46,7 @@
 
 .secondSection { 
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .dateSection {
@@ -69,4 +70,10 @@
     color: white; 
     background-color: #596AFF;
     margin-top: 10px;
+}
+
+.segmentTable {
+    width: 80%;
+    padding-top: 100px;
+
 }

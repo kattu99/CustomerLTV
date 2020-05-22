@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Dropdown, Segment, Input} from 'semantic-ui-react'
+import { Grid, Dropdown, Segment, Input, Table, Header, Image} from 'semantic-ui-react'
 import top from '../res/top.png'
 import middle from '../res/middle.png'
 import bottom from '../res/bottom.png'
@@ -69,6 +69,7 @@ class CustomerSegmentationView extends Component {
             startDate: new Date(),
             endDate: new Date(),
             items: [],  
+            showTable: false, 
         }
          
     }
@@ -137,7 +138,8 @@ class CustomerSegmentationView extends Component {
         .then(data => {
             //do something with response
             console.log(data)
-            this.setState({items: data})
+            this.setState({items: data, 
+            showTable: true})
           })
           .catch(err => {
             console.log(err)
@@ -222,19 +224,60 @@ class CustomerSegmentationView extends Component {
         for (var i=0; i < this.state.items.length; i++) {
             let item = this.state.items[i]
             console.log(item)
-            if (count % 3 == 0) {
+            if (count % 3 === 0) {
                 lst.push(
-                    <CustomerSegment title={item['heading']} image={top} LTV={item['LTV']} AOV={item['AOV']} CR={item['churn']} RR={item['frequency']} color='#1ECE96'/>
+
+                    <Table.Row>
+                        
+                        <Table.Cell>
+                            <Header as='h4' image>
+                                <Image src={top} rounded size='mini' />
+                                <Header.Content>
+                                    {item['heading']}
+                                </Header.Content>
+                            </Header>
+                        </Table.Cell>
+                        <Table.Cell>{item['LTV']}</Table.Cell>
+                        <Table.Cell>{item['AOV']}</Table.Cell>
+                        <Table.Cell>{item['churn']}</Table.Cell>
+                        <Table.Cell>{item['frequency']}</Table.Cell>
+                    </Table.Row>
                 )
             }
-            else if (count % 3 == 1) {
+            else if (count % 3 === 1) {
                 lst.push(
-                    <CustomerSegment title={item['heading']} image={middle} LTV={item['LTV']} AOV={item['AOV']} CR={item['churn']} RR={item['frequency']} color='#4C71F4'/>
+                    <Table.Row>
+                        <Table.Cell>
+                            <Header as='h4' image>
+                                <Image src={middle} rounded size='mini' />
+                                <Header.Content>
+                                    {item['heading']}
+                                </Header.Content>
+                            </Header>
+                        </Table.Cell>
+                        <Table.Cell>{item['LTV']}</Table.Cell>
+                        <Table.Cell>{item['AOV']}</Table.Cell>
+                        <Table.Cell>{item['churn']}</Table.Cell>
+                        <Table.Cell>{item['frequency']}</Table.Cell>
+                    </Table.Row>               
                 )
             }
-            else if (count % 3 == 2) {
+            else if (count % 3 === 2) {
                 lst.push(
-                    <CustomerSegment title={item['heading']} image={bottom} LTV={item['LTV']} AOV={item['AOV']} CR={item['churn']} RR={item['frequency']} color='#FF7067'/>
+                <Table.Row>
+                    <Table.Cell>
+                        <Header as='h4' image>
+                            <Image src={bottom} rounded size='mini' />
+                            <Header.Content>
+                                {item['heading']}
+                            </Header.Content>
+                        </Header>
+                    </Table.Cell>
+                    <Table.Cell>{item['LTV']}</Table.Cell>
+                    <Table.Cell>{item['AOV']}</Table.Cell>
+                    <Table.Cell>{item['churn']}</Table.Cell>
+                    <Table.Cell>{item['frequency']}</Table.Cell>
+                </Table.Row> 
                 )
             }
             count = count + 1
@@ -264,9 +307,22 @@ class CustomerSegmentationView extends Component {
                 <div className='button' onClick={this.runQuery}>
                     Run Query
                 </div>
-                {lst.map((item) => 
-                    item
-                )}
+                {this.state.showTable ? <div className='segmentTable'>
+                    <Table celled>
+                        <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Segment</Table.HeaderCell>
+                            <Table.HeaderCell>Lifetime Value</Table.HeaderCell>
+                            <Table.HeaderCell>Average Order Value</Table.HeaderCell>
+                            <Table.HeaderCell>Churn Rate</Table.HeaderCell>
+                            <Table.HeaderCell>Monthly Order Frequency</Table.HeaderCell>
+                        </Table.Row>
+                        </Table.Header>
+                    {lst.map((item) => 
+                        item
+                    )}
+                    </Table>
+                    </div> : null}
             </div>
         )
     }
