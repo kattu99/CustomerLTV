@@ -126,8 +126,15 @@ class CustomerSegmentationView extends Component {
     runQuery = (e) => {
         let data = {
             "param": this.state.selected,
-            "sortSelected": this.state.sortSelected
+            "sortSelected": this.state.sortSelected,
+            "startDate": this.state.startDate.getDate(),
+            "startMonth": this.state.startDate.getMonth(),
+            "startYear": this.state.startDate.getFullYear(),
+            "endDate": this.state.endDate.getDate(),
+            "endMonth": this.state.endDate.getMonth(),
+            "endYear": this.state.endDate.getFullYear(),
         }
+        console.log(data['startYear'])
         let jsondata = JSON.stringify(data)
         fetch('http://localhost:5000/LTVChurn', {
             method: 'POST',
