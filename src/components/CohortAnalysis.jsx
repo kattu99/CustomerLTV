@@ -100,7 +100,7 @@ class CustomerCohortAnalysis extends Component {
                 "condition": this.state.condition,
             }
             let jsondata = JSON.stringify(data)
-            fetch('http://localhost:5000/CohortAnalysis', {
+            fetch('https://lucyltv.herokuapp.com/CohortAnalysis', {
                 method: 'POST',
                 body: jsondata,
             })

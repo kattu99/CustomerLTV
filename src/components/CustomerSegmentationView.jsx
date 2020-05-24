@@ -136,7 +136,7 @@ class CustomerSegmentationView extends Component {
         }
         console.log(data['startYear'])
         let jsondata = JSON.stringify(data)
-        fetch('http://localhost:5000/LTVChurn', {
+        fetch('https://lucyltv.herokuapp.com/LTVChurn', {
             method: 'POST',
             body: jsondata,
         })
