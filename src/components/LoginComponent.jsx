@@ -3,12 +3,15 @@ import CustomerSegmentationView from './CustomerSegmentationView'
 import CustomerCohortAnalysis from './CohortAnalysis'
 import Insights from './InsightView'
 import {Input} from 'semantic-ui-react'
+import history from '../history';
+
 import {
   BrowserRouter as Router,
-
+Redirect,
   Switch,
   Route,
-  Link
+  Link,
+  withRouter
 } from "react-router-dom";
 
 
@@ -51,7 +54,8 @@ class LoginComponent extends Component {
             if (data['resp'] == 'true') {
                 this.setState({
                     auth: true, 
-                })
+                });
+                history.push('/customersegments');
             }
           })
           .catch(err => {
@@ -65,7 +69,7 @@ class LoginComponent extends Component {
                     <Router>
                         <div className = 'navbar'>
                         <div className='left'>
-                            <p className='workOSheading'>Lucy Customer Analytics</p>
+                            <p className='workOSheading'>Query</p>
                         </div>
                         <div className='right'>
                             <Link to="/customersegments" style={{ textDecoration: 'none',color:'#fdfdfd'}}><p className='datasources'>Customer Segments</p></Link>
@@ -87,7 +91,7 @@ class LoginComponent extends Component {
                     </Router>
                     { this.state.auth ? null : <div className='login'>
                         <Input placeholder="User Name" onChange={this.User}/>
-                        <Input placeholder="Password" onChange={this.Password}/>
+                        <Input type='password' placeholder="Password" onChange={this.Password}/>
                         <div className='button' onClick={this.auth}>Submit</div>
                     </div> }
             </div>
