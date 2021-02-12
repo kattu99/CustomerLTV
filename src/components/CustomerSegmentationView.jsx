@@ -101,6 +101,14 @@ class CustomerSegmentationView extends Component {
         console.log(this.state.selected)
     }
 
+    handleOrderChange = (e, {value}) => {
+        this.setState({
+            ascending: value,
+        })
+        console.log(this.state.selected)
+    }
+
+
     InputChange =(e, {value}) => {
         this.setState({
             input: value,
@@ -133,10 +141,11 @@ class CustomerSegmentationView extends Component {
             "endDate": this.state.endDate.getDate(),
             "endMonth": this.state.endDate.getMonth(),
             "endYear": this.state.endDate.getFullYear(),
+            "ascending": this.state.ascending
         }
         console.log(data['startYear'])
         let jsondata = JSON.stringify(data)
-        fetch('https://lucyltv.herokuapp.com/LTVChurn', {
+        fetch('http://localhost:5000/LTVChurn', {
             method: 'POST',
             body: jsondata,
         })
@@ -147,7 +156,7 @@ class CustomerSegmentationView extends Component {
             console.log(data)
             this.setState({items: data, 
             showTable: true})
-          })
+          }) 
           .catch(err => {
             console.log(err)
           })
@@ -208,6 +217,19 @@ class CustomerSegmentationView extends Component {
             },
         ]
 
+        const order = [
+            {
+                key: 'ascending',
+                text: 'Ascending',
+                value: 'ascending',
+            },
+            {
+                key: 'descending',
+                text: 'Descending',
+                value: 'descending',
+            },
+        ]
+
         const operations = [
             {
                 key: '=',
@@ -233,9 +255,7 @@ class CustomerSegmentationView extends Component {
             console.log(item)
             if (count % 3 === 0) {
                 lst.push(
-
                     <Table.Row>
-                        
                         <Table.Cell>
                             <Header as='h4' image>
                                 <Image src={top} rounded size='mini' />
@@ -291,30 +311,45 @@ class CustomerSegmentationView extends Component {
         }
 
         return (
-           
-            <div className="firstPage">
-                <Dropdown
-                    placeholder='Choose what to segment your customers by'
-                    selection
-                    options={values}
-                    onChange={this.handleChange}
-                />
-                <p className='chooseDate'>Choose Date Range</p>
-                <div className="dateSection">
-                    <DatePicker value={this.state.startDate} onChange={date => this.handleStartDateChange(date)} />
-                    <DatePicker value={this.state.endDate} onChange={date => this.handleEndDateChange(date)} />
-                </div>
-                <p className='chooseDate'>Prioritize By</p>
-                <Dropdown 
-                    placeholder='Choose what metric to sort by'
-                    selection
-                    options={sortby}
-                    onChange={this.handleSecondChange}
-                />
-                <div className='button' onClick={this.runQuery}>
-                    Run Query
-                </div>
-                {this.state.showTable ? <div className='segmentTable'>
+            <div className='customerSegmentationView'>
+                <div className="firstPage">
+                    <div className='firstBar'>
+                        <div className='segmentOption'>
+                            <p className='chooseDate'>Segment Character</p>
+                            <Dropdown
+                                placeholder='Choose what to segment your customers by'
+                                selection
+                                options={values}
+                                onChange={this.handleChange}
+                            />
+                            <p className='chooseDate'>Start Date</p>
+                            <DatePicker value={this.state.startDate} style={{color:"white"}} onChange={date => this.handleStartDateChange(date)} />
+                            <p className='chooseDate'>End Date</p>
+                            <DatePicker value={this.state.endDate} style={{color:"white"}} onChange={date => this.handleEndDateChange(date)} />
+                        </div>
+                    </div>
+                    <div className='filters'>
+                        <p className='chooseDate'>Order By</p>
+                        <Dropdown 
+                            placeholder='Choose what metric to sort by'
+                            selection
+                            options={sortby}
+                            onChange={this.handleSecondChange}
+                        />
+                        <Dropdown 
+                            placeholder='Ascending'
+                            selection
+                            options={order}
+                            onChange={this.handleOrderChange}
+
+                        />
+                    </div>
+                    <div className='button' onClick={this.runQuery}>
+                        Run Query
+                    </div>
+            </div>
+                <div className='segmentTable'>
+                {this.state.showTable ? <div className='segmentTableInner'>
                     <Table celled>
                         <Table.Header>
                         <Table.Row>
@@ -330,6 +365,7 @@ class CustomerSegmentationView extends Component {
                     )}
                     </Table>
                     </div> : null}
+                </div>
             </div>
         )
     }

@@ -3,10 +3,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
 }
 
 .graph {
     width: 70%; 
     margin-top: 100px;
+}
+
+.cohortAnalysisOptions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ECECEC;
+    width: 100vw;
+    padding-top: 100px;
+    padding-bottom: 15px;
 }

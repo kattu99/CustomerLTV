@@ -195,29 +195,31 @@ class CustomerCohortAnalysis extends Component {
         return (
            
             <div className = 'cohortAnalysis'>
-                <div className="secondSection">
-                    <Dropdown
-                        placeholder='Add a condition'
+                <div className='cohortAnalysisOptions'>
+                    <div className="secondSection">
+                        <Dropdown
+                            placeholder='Add a condition'
+                            selection
+                            options={values}
+                            onChange={this.fieldChange}
+                        />
+                        <Dropdown
+                            placeholder='operations'
+                            selection
+                            options={operations}
+                            onChange={this.operationChange}
+                        />
+                        <Input onChange={this.conditionChange}/>
+                    </div>
+                    <Dropdown 
+                        placeholder = 'Choose metric to analyze'
                         selection
-                        options={values}
-                        onChange={this.fieldChange}
+                        options={metrics}
+                        onChange = {this.metricChange}
                     />
-                    <Dropdown
-                        placeholder='operations'
-                        selection
-                        options={operations}
-                        onChange={this.operationChange}
-                    />
-                    <Input onChange={this.conditionChange}/>
-                </div>
-                <Dropdown 
-                    placeholder = 'Choose metric to analyze'
-                    selection
-                    options={metrics}
-                    onChange = {this.metricChange}
-                />
-                <div className='button' onClick={this.runQuery}>
-                    Run Query
+                    <div className='button' onClick={this.runQuery}>
+                        Run Query
+                    </div>
                 </div>
                 {component}
             </div>
